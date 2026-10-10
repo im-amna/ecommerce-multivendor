@@ -1,8 +1,10 @@
 const dotenv = require("dotenv");
 
 // Load environment variables FIRST
+const path = require("path");
+
 dotenv.config({
-  path: "./config/.env",
+  path: path.join(__dirname, "config", ".env"),
 });
 
 const app = require("./app");
@@ -27,7 +29,7 @@ cloudinary.config({
 });
 
 // Create server
-const server = app.listen(process.env.PORT, () => {
+const server = app.listen(process.env.PORT || 5000, () => {
   console.log(`Server is running on http://localhost:${process.env.PORT}`);
 });
 
