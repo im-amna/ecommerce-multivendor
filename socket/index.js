@@ -20,6 +20,13 @@ app.get("/", (req, res) => {
   res.send("Hello world from socket server!");
 });
 
+app.get("/api/socket-io", (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "Socket deployment endpoint is working!",
+  });
+});
+
 let users = [];
 
 const addUser = (userId, socketId) => {
