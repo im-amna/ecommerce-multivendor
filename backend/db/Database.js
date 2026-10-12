@@ -1,14 +1,14 @@
+
 const mongoose = require("mongoose");
 
-const connectDatabase = () => {
-  mongoose
-    .connect(process.env.DB_URL)
-    .then((data) => {
-      console.log(`MongoDB connected with server: ${data.connection.host}`);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+const connectDatabase = async () => {
+  if (mongoose.connection.readyState === 1) {
+    return mongoose.connection;
+  }
+
+  return mongoose.connect(process.env.DB_URL, {
+    serverSelectionTimeoutMS: 10000,
+  });
 };
 
 module.exports = connectDatabase;
